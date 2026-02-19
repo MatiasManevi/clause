@@ -1,2 +1,6 @@
 fastapi
 uvicorn[standard]
+pydantic
+sqlalchemy
+boto3
+python-multipart
