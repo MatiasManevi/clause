@@ -2,6 +2,7 @@ fastapi
 uvicorn[standard]
 pydantic
 sqlalchemy
+pydantic[email]
 boto3
 python-multipart
 pwdlib[argon2]

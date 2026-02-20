@@ -1,9 +1,10 @@
-from datetime import datetime, timedelta, timezone
-from typing import Annotated
-
 import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
+
+from datetime import datetime, timedelta, timezone
+from typing import Dict, Any, Annotated
+from uuid import uuid4
 from jwt.exceptions import InvalidTokenError
 from pwdlib import PasswordHash
 from pydantic import BaseModel
@@ -115,3 +116,24 @@ async def get_current_active_user(
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
+
+
+def create_user(user_in: Dict[str, Any]) -> Dict[str, Any]:
+    email = (user_in.get("email") or "").strip().lower()
+    password = user_in.get("password")
+    full_name = user_in.get("full_name")
+
+    if not email or not password:
+        raise ValueError("email and password are required")
+
+    hashed = get_password_hash(password)
+
+    user = {
+        "id": str(uuid4()),
+        "email": email,
+        "full_name": full_name,
+        "hashed_password": hashed,
+        "is_active": True,
+        "created_at": datetime.utcnow().isoformat() + "Z",
+    }
+    return user

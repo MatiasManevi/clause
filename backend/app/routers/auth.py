@@ -4,8 +4,22 @@ from app.core.auth import Token, authenticate_user, create_access_token
 from app.core.auth import fake_users_db, ACCESS_TOKEN_EXPIRE_MINUTES
 from typing import Annotated
 from datetime import timedelta
+from app.core import auth as auth_core
+from app.schemas.user import UserCreate, UserOut
 
 router = APIRouter()
+
+
+@router.post("/signup", response_model=UserOut, status_code=201)
+async def signup(user_in: UserCreate):
+    try:
+        user = auth_core.create_user(user_in.dict())
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    # Note: persistence to DB is not implemented yet.
+    return user
+
 
 @router.post("/login")
 async def login_for_access_token(
