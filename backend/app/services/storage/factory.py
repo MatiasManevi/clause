@@ -1,4 +1,4 @@
-from app.core.config import STORAGE_PROVIDER, S3_BUCKET, S3_REGION
+from app.core.config import config
 from .local import LocalStorageStrategy
 from .s3 import S3StorageStrategy
 from .service import StorageService
@@ -6,10 +6,10 @@ from .service import StorageService
 
 def get_storage_service() -> StorageService:
 
-    if STORAGE_PROVIDER == "s3":
+    if config.storage_provider == "s3":
         strategy = S3StorageStrategy(
-            bucket_name=S3_BUCKET,
-            region=S3_REGION
+            bucket_name=config.s3_bucket,
+            region=config.s3_region
         )
     else:
         strategy = LocalStorageStrategy()

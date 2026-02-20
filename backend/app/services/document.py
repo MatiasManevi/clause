@@ -2,7 +2,7 @@
 from fastapi import UploadFile, HTTPException, status
 from datetime import datetime
 # from app.models.document import Document
-from app.schemas.document import DocumentResponse
+from app.models.document import DocumentResponse
 from app.services.storage.service import StorageService
 
 ALLOWED_TYPES = {

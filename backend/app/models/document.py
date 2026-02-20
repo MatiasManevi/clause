@@ -1,32 +1,15 @@
-# import uuid
-# from datetime import datetime
-# from sqlalchemy import Column, String, Text, DateTime, ForeignKey, Integer
-# from sqlalchemy.dialects.postgresql import UUID
-# from sqlalchemy.orm import relationship
-# from app.db.base import Base
+from pydantic import BaseModel
+from uuid import UUID
+from datetime import datetime
 
 
-# class Document(Base):
-#     __tablename__ = "documents"
+class DocumentResponse(BaseModel):
+    id: UUID
+    filename: str
+    content_type: str
+    file_size: int
+    processing_status: str
+    upload_date: datetime
 
-#     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-#     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
-
-#     filename = Column(String, nullable=False)
-#     content_type = Column(String, nullable=False)
-#     file_size = Column(Integer, nullable=False)
-#     storage_url = Column(String, nullable=False)
-
-#     checksum = Column(String, nullable=False)
-
-#     processing_status = Column(
-#         String,
-#         nullable=False,
-#         default="pending"
-#     )
-
-#     text_extracted = Column(Text, nullable=True)
-
-#     upload_date = Column(DateTime, default=datetime.utcnow, nullable=False)
-
-#     user = relationship("User", back_populates="documents")
+    class Config:
+        from_attributes = True

@@ -5,7 +5,7 @@ from app.core.auth import fake_users_db, ACCESS_TOKEN_EXPIRE_MINUTES
 from typing import Annotated
 from datetime import timedelta
 from app.core import auth as auth_core
-from app.schemas.user import UserCreate, UserOut
+from app.models.user import UserCreate, UserOut
 
 router = APIRouter(tags=["Authentication"])
 
