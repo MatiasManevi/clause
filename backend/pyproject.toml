@@ -1,0 +1,18 @@
+[project]
+name = "ai-contract-analyzer"
+version = "0.1.0"
+description = "AI-powered contract risk analyzer"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic[email]",
+    "pydantic-settings",
+    "sqlalchemy",
+    "boto3",
+    "python-multipart",
+    "pwdlib[argon2]",
+    "pyjwt",
+    "python-dotenv"
+]
