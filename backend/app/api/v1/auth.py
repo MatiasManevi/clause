@@ -7,7 +7,7 @@ from datetime import timedelta
 from app.core import auth as auth_core
 from app.schemas.user import UserCreate, UserOut
 
-router = APIRouter()
+router = APIRouter(tags=["Authentication"])
 
 
 @router.post("/signup", response_model=UserOut, status_code=201)

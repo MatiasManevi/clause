@@ -20,8 +20,7 @@ services:
       dockerfile: Dockerfile
     container_name: contract-backend
     restart: unless-stopped
-    # depends_on:
-    #   - postgres
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     environment:
       DATABASE_URL: postgresql+psycopg://contract_user:contract_pass@postgres:5432/contract_db
       STORAGE_PROVIDER: local
