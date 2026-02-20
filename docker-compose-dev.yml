@@ -13,6 +13,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - clause_network
 
   backend:
     build:
@@ -31,6 +33,11 @@ services:
     volumes:
       - ./backend:/app
       - ./backend/storage:/app/storage
+    networks:
+      - clause_network
+
+networks:
+  clause_network:
 
 volumes:
   postgres_data:
